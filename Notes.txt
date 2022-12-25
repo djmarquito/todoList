@@ -1,0 +1,99 @@
+npm i
+npm i mongoose
+const mongoose = require("mongoose");
+
+// const items = ["Buy Food", "Cook Food", "Eat Food"];
+// const workItems = [];
+mongoose.connect("mongodb://0.0.0.0:27017/todolistDB");
+
+const itemsSchema = {name: String};
+
+const Item = mongoose.model("Item",itemsSchema);
+
+const Item1 = new Item ({
+  name: "Welcome to your todo list!"
+});
+
+const Item2 = new Item ({
+  name: "Hit the + button to add a new item."
+});
+
+const Item3 = new Item ({
+  name: "<-- Hit this to delete an item."
+});
+
+const defaultItems = [Item1, Item2, Item3];
+
+Item.insertMany(defaultItems, function(err){
+  if (err){console.log(err);
+  }else{
+    console.log("Succesfully saved all default items to DB.");
+  }
+});
+
+mongod-mongosh-node app.js
+
+----------------------------------------------------
+express route parameters to create dinamic routes:
+localhost:3000/Work
+localhost:3000/Home
+----------------------
+app.get("/:customListName", function(req,res){
+  console.log(req.params.customListName);
+  //Returns what the user types after localhost:3000
+  });
+--------------------
+const listSchema = {
+name: String, //name
+items: [itemsSchema] //array of items
+}
+-----------------------------------------------
+const List = mongoose.model("List", listSchema);
+-----------------------------------------------
+app.get("/:customListName", function(req,res){
+  const customListName = req.params.customListName;
+      const list = new List({
+      name: customListName,
+      items: defaultItems
+    });
+list.save();
+  });
+------------------------------------------------
+
+find => gives back an array
+findOne => gives back yes or no
+=================================
+app.get("/:customListName", function(req,res){
+  const customListName = req.params.customListName;
+
+List.findOne({name: customListName}, function (err, foundList){
+  if (!err){
+    if (!foundList){
+        //console.log("Doesn't exist");
+        //Create a new list
+        const list = new List({
+        name: customListName,
+        items: defaultItems
+      });
+  list.save();
+  res.redirect("/"+customListName);
+    } else {
+      // console.log("Exists");
+      //Show an existing list
+      res.render("list", {listTitle: foundList.name, newListItems: foundList.items});
+    }
+  }
+});
+  });
+-------
+db.lists.drop()
+===============
+Custom List:
+List.findOne({name: listName}, function(err,foundList){
+    foundList.items.push(item);
+    foundList.save();
+    res.redirect("/" + listName);
+---------------------------------
+localhost:3000/Home & localhost:3000/home:
+npm i lodash
+const _ = require("lodash");
