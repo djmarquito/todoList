@@ -81,8 +81,7 @@ if (listName === "Today"){
     foundList.save();
     res.redirect("/" + listName);
   });
-}
-
+ }
 });
 
 app.post("/delete", function(req, res){
@@ -101,14 +100,12 @@ if (listName === "Today"){
       res.redirect("/" + listName);
     }
   });
-}
-
+ }
 });
 
 // app.get("/work", function(req,res){
 //   res.render("list", {listTitle: "Work List", newListItems: workItems});
 // });
-
 
   app.get("/:customListName", function(req,res){
   const customListName = _.capitalize(req.params.customListName);
@@ -131,9 +128,7 @@ List.findOne({name: customListName}, function (err, foundList){
     }
   }
 });
-  });
-
-
+});
 
 app.get("/about", function(req, res){
   res.render("about");
