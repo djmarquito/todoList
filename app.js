@@ -7,6 +7,9 @@ const mongoose = require("mongoose");
 const _ = require("lodash");
 const app = express();
 
+// Render.com port variable:
+const PORT = process.env.PORT || 3030;
+
 app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({extended: true}));
@@ -141,6 +144,12 @@ if (port == null || port == ""){
   port = 3000;
 }
 
-app.listen(port, function() {
-  console.log("Server has started succesfully");
+//Render.com code:
+app.listen(PORT, () => {
+  console.log(`server started on port ${PORT}`);
 });
+
+// heroku code NOT FREE anymore!
+// app.listen(port, function() {
+//   console.log("Server has started succesfully");
+// });
