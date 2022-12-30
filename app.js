@@ -8,7 +8,7 @@ const _ = require("lodash");
 const app = express();
 
 // Render.com port variable:
-const PORT = process.env.PORT || 3030;
+const port = process.env.PORT || 3000;
 
 app.set('view engine', 'ejs');
 
@@ -134,14 +134,14 @@ app.get("/about", function(req, res){
   res.render("about");
 });
 
-let port = process.env.PORT;
-if (port == null || port == ""){
-  port = 3000;
-}
+// let port = process.env.PORT;
+// if (port == null || port == ""){
+//   port = 3000;
+// }
 
 //Render.com code:
-app.listen(PORT, () => {
-  console.log(`server started on port ${PORT}`);
+app.listen(port, () => {
+  console.log(`server started on port ${port}`);
 });
 
 // heroku code NOT FREE anymore!
