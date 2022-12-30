@@ -8,7 +8,7 @@ const _ = require("lodash");
 const app = express();
 
 // Render.com port variable:
-const port = process.env.PORT || 3000;
+const port = process.env.RENDER_PORT || 3000;
 
 app.set('view engine', 'ejs');
 
