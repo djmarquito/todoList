@@ -1,5 +1,5 @@
 //jshint esversion:6
-
+require('dotenv').config();
 const express = require("express");
 const bodyParser = require("body-parser");
 // const date = require(__dirname + "/date.js");
@@ -15,7 +15,8 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
-mongoose.connect("mongodb+srv://Admin-Marcos:Wz4NqavPB2u1p2XE@cluster0.nsch4xu.mongodb.net/todolistDB");
+mongoose.connect("mongodb+srv://Admin-Marcos:"+process.env.MONGO_PASS+"@cluster0.nsch4xu.mongodb.net/todolistDB");
+
 // mongoose.connect("mongodb://0.0.0.0:27017/todolistDB");
 // const items = ["Buy Food", "Cook Food", "Eat Food"];
 // const workItems = [];
